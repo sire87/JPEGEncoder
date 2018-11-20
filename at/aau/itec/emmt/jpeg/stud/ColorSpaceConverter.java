@@ -3,6 +3,7 @@ package at.aau.itec.emmt.jpeg.stud;
 import at.aau.itec.emmt.jpeg.impl.Component;
 import at.aau.itec.emmt.jpeg.impl.YUVImage;
 import at.aau.itec.emmt.jpeg.spec.ColorSpaceConverterI;
+import at.aau.itec.emmt.jpeg.spec.SubSamplerI;
 import at.aau.itec.emmt.jpeg.spec.YUVImageI;
 
 import java.awt.*;
@@ -38,7 +39,7 @@ public class ColorSpaceConverter implements ColorSpaceConverterI {
         int[][] compDataCb = new int[width][height];
         int[][] compDataCr = new int[width][height];
 
-        // convert rgb to YCbCr and store in respective component data arrays
+        // convert rgb to YCbCr and store values in respective component data arrays
         for (int i = 0; i < rgbPixels2D.length; i++) {
             for (int j = 0; j < rgbPixels2D[0].length; j++) {
                 int red = 0xff & (rgbPixels2D[i][j] >> 16);
@@ -53,10 +54,14 @@ public class ColorSpaceConverter implements ColorSpaceConverterI {
             }
         }
 
-        // TODO: create components
+        // create YCbCr components
+        Component y = new Component(compDataY, YUVImageI.Y_COMP);
+        Component cb = new Component(compDataCb, YUVImageI.CB_COMP);
+        Component cr = new Component(compDataCr, YUVImageI.CR_COMP);
+        int samplingRatio = SubSamplerI.YUV_444;
 
-        // TODO: create and return YUVImage
-        throw new RuntimeException("Not yet implemented :-(");
+        // create and return YUVImage
+        return new YUVImage(y, cb, cr, samplingRatio);
     }
 
 }
