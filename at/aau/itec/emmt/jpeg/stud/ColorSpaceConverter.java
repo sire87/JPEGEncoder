@@ -27,17 +27,17 @@ public class ColorSpaceConverter implements ColorSpaceConverterI {
 
         // transform pixel array to 2-dimensional pixel array
         // needed for YCbCr component data
-        int[][] rgbPixels2D = new int[width][height];
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                rgbPixels2D[i][j] = rgbPixels[i * width + j];
+        int[][] rgbPixels2D = new int[height][width];
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                rgbPixels2D[i][j] = rgbPixels[i * height + j];
             }
         }
 
         // 2-dimensional pixel arrays for YCbCr components data
-        int[][] compDataY = new int[width][height];
-        int[][] compDataCb = new int[width][height];
-        int[][] compDataCr = new int[width][height];
+        int[][] compDataY = new int[height][width];
+        int[][] compDataCb = new int[height][width];
+        int[][] compDataCr = new int[height][width];
 
         // convert rgb to YCbCr and store values in respective component data arrays
         for (int i = 0; i < rgbPixels2D.length; i++) {
