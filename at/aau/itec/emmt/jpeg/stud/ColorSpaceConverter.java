@@ -45,12 +45,12 @@ public class ColorSpaceConverter implements ColorSpaceConverterI {
                 int red = 0xff & (rgbPixels2D[i][j] >> 16);
                 int green = 0xff & (rgbPixels2D[i][j] >> 8);
                 int blue = 0xff & (rgbPixels2D[i][j]);
-                double y = 0.299 * red + 0.587 * green + 0.114 * blue;
-                double cb = 128 - 0.1687 * red - 0.3313 * green + 0.5 * blue;
-                double cr = 128 + 0.5 * red - 0.4187 * green - 0.0813 * blue;
-                compDataY[i][j] = (int) y;
-                compDataCb[i][j] = (int) cb;
-                compDataCr[i][j] = (int) cr;
+                int y = (int) (0.299 * red + 0.587 * green + 0.114 * blue);
+                int cb = 128 - (int) (0.1687 * red + 0.3313 * green - 0.5 * blue);
+                int cr = 128 + (int) (0.5 * red - 0.4187 * green - 0.0813 * blue);
+                compDataY[i][j] = y;
+                compDataCb[i][j] = cb;
+                compDataCr[i][j] = cr;
             }
         }
 
